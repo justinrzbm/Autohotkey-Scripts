@@ -1,4 +1,15 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿; Combination script that changes volume when running zoom and kills the process after.
+; The volume adjustment labels rely on a program called Audio Switcher
+; Download here: https://audioswit.ch/er
+; The hotkeys are based on my personal preference of what I have set up in Audio Switcher
+; The volume set numbers are my personal preference
+; AHK is very finnicky with identifying sound devices and I could not find a way to set the volume
+; on these devices from within the script. In a future version I might try again.
+
+
+
+
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
