@@ -1,19 +1,16 @@
 ﻿; Combination script that changes volume when running zoom and kills the process after.
-; The volume adjustment labels rely on a program called Audio Switcher
-; Download here: https://audioswit.ch/er
-; The hotkeys are based on my personal preference of what I have set up in Audio Switcher
+; The device number for the last argument in the SoundSet command can be found with
+; the a script by the authors of AHK (sound_devices.ahk) in this directory
 ; The volume set numbers are my personal preference
-; AHK is very finnicky with identifying sound devices and I could not find a way to set the volume
-; on these devices from within the script. In a future version I might try again.
-
-
 
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
 #SingleInstance Force
+DetectHiddenWindows Off
 
 flag_firstIter = 1
 Loop {
@@ -23,35 +20,31 @@ Loop {
 			Gosub, VolumeDown
 		WinWaitClose, ahk_class ZPContentViewWndClass
 		; So zoom doesn't close when switching from minimized to full screen window
-		Sleep 300
+		; Also from pop-up windows like waiting to join etc
+		Sleep 1000
 		
 		if not WinExist("ahk_class ZPContentViewWndClass")
 			break
-		; flag stops VolumeDown running every min/maximize
+		; flag stops VolumeDown/Up running every min/maximize
 		flag_firstIter = 0
 	}
+	MsgBox, 1, Zoom Close Script, Meeting window closed. Close the program?
+	IfMsgBox, OK
+	{
 	Process, Close, zoom.exe
 	Gosub, VolumeUp
-	if ErrorLevel
-		MsgBox, , , Closed that shit successfully, 0.75
-	else
-		MsgBox, , , Failed to close that piece of shit app, 0.75
+	}
 }
 
 VolumeDown:
-	Send, !]
-	Sleep, 100
-	Soundset, 45
-	Send, ![
-	Sleep, 100
-	Soundset, 15
+	SoundSet, 45, , , 2 ; Speakers
+	SoundSet, 15, , , 3 ; Headphones
 	return
 	
 VolumeUp:
-	Send, !]
-	Sleep, 100
-	Soundset, 80
-	Send, ![
-	Sleep, 100
-	Soundset, 30
+	SoundSet, 70, , , 2 ; Speakers
+	SoundSet, 30, , , 3 ; Headphones
 	return
+	
+;class of main meeting window
+;ahk_class ZPContentViewWndClass
