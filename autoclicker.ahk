@@ -4,12 +4,18 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 
-InputBox, key, Autoclicker, Type key to press,`n`` to end`, \ to pause,,,,,,,{LButton}
+InputBox, key, Autoclicker, Type key to press`n`` to end`, \ to pause,,,,,,,,{LButton}
+if ErrorLevel
+	ExitApp
 InputBox, delay, Autoclicker, Type delay (in ms)`n`` to end`, \ to pause,,,,,,,,30
+if ErrorLevel
+	ExitApp
 
 while True
 	{
 	InputBox, toggle_bool, Autoclicker, Hold mode (hold MButton to trigger)? (Y/N),,,,,,,,Y
+	if ErrorLevel
+		ExitApp
 	StringLower, toggle_bool, toggle_bool
 	if toggle_bool not in y,n
 		{
