@@ -5,19 +5,29 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #SingleInstance Force
 CoordMode, Mouse, Screen
+title = Snip & Sketch
 
 #+d::
-	MouseMove, A_ScreenWidth-150, A_ScreenHeight-100
+	MouseMove, A_ScreenWidth-150, A_ScreenHeight-150
 	Sleep 100
 	Click
-	WinWait, Snip & Sketch, , 2
+	WinWait, %title%, , 2
 	if ErrorLevel
 		return
 	Sleep 100
-	Send, ^s
-	WinWait, Save As
+	Loop{
+		ControlSend,,ls, %title%
+		WinWait, Save As, , 0.5
+		if !ErrorLevel
+			break
+		;MsgBox %ErrorLevel%
+	}
 	Sleep 200
-	Send, {Enter}
+	ControlSend, , {Enter}, Save As
+	WinWaitClose, Save As
 	Sleep 200
-	WinClose, Snip & Sketch
+	WinClose, %title%
 	return
+	
+Esc:: ExitApp
+k::KeyHistory
