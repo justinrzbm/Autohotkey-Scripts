@@ -16,18 +16,23 @@ title = Snip & Sketch
 		return
 	Sleep 100
 	Loop{
-		ControlSend,,ls, %title%
-		WinWait, Save As, , 0.5
+		Send, ^s
+		WinWait, Save As, , 0.1
 		if !ErrorLevel
 			break
-		;MsgBox %ErrorLevel%
+	}
+	Sleep 100
+	Loop {
+		ControlSend, , {Enter}, Save As
+		WinWaitClose, Save As, , 0.1
+		if !ErrorLevel
+			break
 	}
 	Sleep 200
-	ControlSend, , {Enter}, Save As
-	WinWaitClose, Save As
-	Sleep 200
 	WinClose, %title%
+	Sleep 500
+	; if WinExist, %title% ; do something
 	return
 	
-Esc:: ExitApp
-k::KeyHistory
+; Esc:: ExitApp
+; k::KeyHistory
