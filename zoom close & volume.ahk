@@ -28,16 +28,16 @@ Loop {
 		; flag stops VolumeDown/Up running every min/maximize
 		flag_firstIter = 0
 	}
-	MsgBox, 1, Zoom Close Script, Meeting window closed. Close the program?
-	IfMsgBox, OK
-	{
+	MsgBox, 1, Zoom Close Script, Meeting window closed. Close the program?, 10
+	IfMsgBox, Cancel
+		Continue
+	; Otherwise, close app
 	Process, Close, zoom.exe
 	Gosub, VolumeUp
-	}
 }
 
 VolumeDown:
-	SoundSet, 45, , , 2 ; Speakers
+	SoundSet, 40, , , 2 ; Speakers
 	SoundSet, 15, , , 3 ; Headphones
 	return
 	
