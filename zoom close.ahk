@@ -19,7 +19,7 @@ Loop {
 		WinWaitClose, ahk_class ZPContentViewWndClass
 		; So zoom doesn't close when switching from minimized to full screen window
 		; Also from pop-up windows like waiting to join etc
-		Sleep 1000
+		Sleep 1600
 		
 		if not WinExist("ahk_class ZPContentViewWndClass")
 			break
