@@ -22,7 +22,7 @@ for window_id in windows_ids
     ; loop through the tab names
     for tab in tabs
     {   
-        if (tab != "" && RegExMatch(title, ".*" tab ".*"))
+        if (tab != "" && RegExMatch(title, "i).*" tab ".*"))
         {
             ; close the tab by sending Ctrl+w to the window
             WinActivate("ahk_id" window_id)
