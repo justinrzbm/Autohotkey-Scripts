@@ -12,6 +12,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance Force
 DetectHiddenWindows Off
 
+; ahk_class ZPFloatVideoWndClass TODO: add this class to window group
+; use soundget to store volumes and restore
+
+
 flag_firstIter = 1
 Loop {
 	Loop {
